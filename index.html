@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Almacenamiento de Datos</title>
+  <!-- Tailwind CSS vía CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <header class="bg-blue-600 text-white p-6 text-center">
+    <h1 class="text-3xl font-bold">Tipos de Almacenamiento de Datos</h1>
+    <p class="mt-2">Web educativa interactiva</p>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 space-y-12">
+    <!-- Sección: Filtro -->
+    <section id="filtro">
+      <h2 class="text-2xl font-semibold mb-4">🔍 Filtro de tipos</h2>
+      <select id="filtroSelect" class="border rounded p-2">
+        <option value="todos">Todos</option>
+        <option value="primario">Almacenamiento primario</option>
+        <option value="secundario">Almacenamiento secundario</option>
+        <option value="nube">Almacenamiento en la nube</option>
+      </select>
+    </section>
+
+    <!-- Sección: Tarjetas -->
+    <section id="tarjetas">
+      <h2 class="text-2xl font-semibold mb-4">📦 Tarjetas informativas</h2>
+      <div id="tarjetasContainer" class="grid gap-6 md:grid-cols-3">
+        <!-- Tarjeta: Primario -->
+        <div class="card border rounded-xl shadow p-4 bg-white" data-tipo="primario">
+          <h3 class="text-xl font-bold mb-2">Almacenamiento Primario</h3>
+          <p>Memorias como RAM y caché: rápidas pero volátiles.</p>
+        </div>
+        <!-- Tarjeta: Secundario -->
+        <div class="card border rounded-xl shadow p-4 bg-white" data-tipo="secundario">
+          <h3 class="text-xl font-bold mb-2">Almacenamiento Secundario</h3>
+          <p>Discos duros y SSD: mayor capacidad, persistentes.</p>
+        </div>
+        <!-- Tarjeta: Nube -->
+        <div class="card border rounded-xl shadow p-4 bg-white" data-tipo="nube">
+          <h3 class="text-xl font-bold mb-2">Almacenamiento en la Nube</h3>
+          <p>Servicios online como Google Drive o Dropbox.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección: Tabla comparativa -->
+    <section id="tabla">
+      <h2 class="text-2xl font-semibold mb-4">📊 Tabla comparativa</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300 bg-white rounded-lg">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="p-3 border">Tipo</th>
+              <th class="p-3 border">Velocidad</th>
+              <th class="p-3 border">Capacidad</th>
+              <th class="p-3 border">Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border">Primario</td>
+              <td class="p-3 border">Muy alta</td>
+              <td class="p-3 border">Limitada</td>
+              <td class="p-3 border">RAM</td>
+            </tr>
+            <tr>
+              <td class="p-3 border">Secundario</td>
+              <td class="p-3 border">Media</td>
+              <td class="p-3 border">Alta</td>
+              <td class="p-3 border">SSD, HDD</td>
+            </tr>
+            <tr>
+              <td class="p-3 border">Nube</td>
+              <td class="p-3 border">Variable</td>
+              <td class="p-3 border">Escalable</td>
+              <td class="p-3 border">Google Drive</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección: Glosario -->
+    <section id="glosario">
+      <h2 class="text-2xl font-semibold mb-4">📖 Glosario</h2>
+      <dl class="space-y-4">
+        <div>
+          <dt class="font-bold">RAM</dt>
+          <dd>Memoria de acceso aleatorio, rápida pero volátil.</dd>
+        </div>
+        <div>
+          <dt class="font-bold">SSD</dt>
+          <dd>Unidad de estado sólido, más rápida que un disco duro tradicional.</dd>
+        </div>
+        <div>
+          <dt class="font-bold">Nube</dt>
+          <dd>Servicios de almacenamiento en internet accesibles desde cualquier lugar.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Sección: Quiz -->
+    <section id="quiz">
+      <h2 class="text-2xl font-semibold mb-4">📝 Quiz rápido</h2>
+      <p class="mb-2">¿Qué tipo de almacenamiento es volátil?</p>
+      <button onclick="verificarRespuesta('primario')" class="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">Primario</button>
+      <button onclick="verificarRespuesta('secundario')" class="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">Secundario</button>
+      <button onclick="verificarRespuesta('nube')" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Nube</button>
+      <p id="quizResultado" class="mt-3 font-semibold"></p>
+    </section>
+  </main>
+
+  <footer class="bg-gray-200 p-4 text-center text-sm">
+    © 2025 Proyecto educativo sobre almacenamiento de datos.
+  </footer>
+
+  <!-- Script para interactividad -->
+  <script>
+    // Filtro de tarjetas
+    const filtroSelect = document.getElementById("filtroSelect");
+    const tarjetas = document.querySelectorAll(".card");
+
+    filtroSelect.addEventListener("change", () => {
+      const valor = filtroSelect.value;
+      tarjetas.forEach(t => {
+        if (valor === "todos" || t.dataset.tipo === valor) {
+          t.style.display = "block";
+        } else {
+          t.style.display = "none";
+        }
+      });
+    });
+
+    // Quiz
+    function verificarRespuesta(respuesta) {
+      const resultado = document.getElementById("quizResultado");
+      if (respuesta === "primario") {
+        resultado.textContent = "✅ Correcto: el almacenamiento primario (RAM) es volátil.";
+        resultado.className = "text-green-600 font-bold mt-3";
+      } else {
+        resultado.textContent = "❌ Incorrecto. Revisa las tarjetas para repasar.";
+        resultado.className = "text-red-600 font-bold mt-3";
+      }
+    }
+  </script>
+</body>
+</html>
